@@ -55,7 +55,8 @@
   "xo": {
     "parser": "babel-eslint",
     "extends": ["prettier", "plugin:react/recommended"],
-    "env": ["node", "browser", "es6"]
+    "env": ["node", "browser", "es6"],
+    "ignores": ["**/flow-typed/**"]
   },
   "prettier": {
     "singleQuote": true,

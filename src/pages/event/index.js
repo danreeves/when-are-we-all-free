@@ -1,6 +1,7 @@
 import React from 'react';
 import { gql } from 'apollo-boost';
 import { Query } from 'react-apollo';
+import type { Match } from 'react-router-dom';
 
 const getQuery = id => gql`
   query {
@@ -39,14 +40,10 @@ const SlotList = ({ eventId }: { eventId: string }) => (
   </Query>
 );
 
-type ReactRouterMatch = {
-  params: Object,
-};
-export default function SlotsPage({ match }: { match: ReactRouterMatch }) {
+export default function SlotsPage({ match }: { match: Match }) {
   return (
     <React.Fragment>
       <h1>Slots</h1>
-
       <SlotList eventId={match.params.id} />
     </React.Fragment>
   );
