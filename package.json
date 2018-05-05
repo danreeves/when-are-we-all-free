@@ -25,7 +25,10 @@
     "eslint-plugin-react": "^7.7.0",
     "flow-bin": "^0.71.0",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.0.5",
     "prettier": "^1.12.1",
+    "pretty-quick": "^1.4.1",
     "webpack": "^4.7.0",
     "webpack-cli": "^2.1.2",
     "webpack-serve": "^0.3.2",
@@ -33,7 +36,8 @@
   },
   "scripts": {
     "start": "webpack-serve --config webpack.js",
-    "dev": "webpack-serve --config webpack.js --development"
+    "dev": "webpack-serve --config webpack.js --development",
+    "precommit": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -48,12 +52,13 @@
   "homepage": "https://github.com/danreeves/when-are-we-all-free#readme",
   "xo": {
     "parser": "babel-eslint",
-    "extends": [
-      "prettier",
-      "plugin:react/recommended"
-    ]
+    "extends": ["prettier", "plugin:react/recommended"]
   },
   "prettier": {
-    "singleQuote": true
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "lint-staged": {
+    "*.{js,jsx,json,md}": ["xo", "pretty-quick --staged"]
   }
 }
