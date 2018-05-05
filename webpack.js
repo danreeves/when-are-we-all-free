@@ -1,6 +1,8 @@
 const path = require('path');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const history = require('connect-history-api-fallback');
+const convert = require('koa-connect');
 
 const DEV = process.argv.includes('--development');
 
@@ -13,24 +15,35 @@ module.exports = {
         loader: 'babel-loader',
 
         options: {
-          presets: ['env', 'react']
-        }
-      }
-    ]
+          presets: ['env', 'react'],
+        },
+      },
+    ],
   },
 
   plugins: [
     !DEV && new UglifyJSPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/index.html'
-    })
+      template: './src/index.html',
+    }),
   ].filter(Boolean),
 
   output: {
     filename: '[name].[hash].js',
     chunkFilename: '[name].[chunkhash].js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
   },
 
-  mode: DEV ? 'development' : 'production'
+  mode: DEV ? 'development' : 'production',
+};
+
+module.exports.serve = {
+  content: [__dirname],
+  add: app => {
+    const historyOptions = {
+      index: '/',
+    };
+
+    app.use(convert(history(historyOptions)));
+  },
 };
