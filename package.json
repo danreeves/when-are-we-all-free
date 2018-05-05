@@ -48,7 +48,8 @@
   "homepage": "https://github.com/danreeves/when-are-we-all-free#readme",
   "xo": {
     "parser": "babel-eslint",
-    "extends": ["prettier", "plugin:react/recommended"]
+    "extends": ["prettier", "plugin:react/recommended"],
+    "env": ["node", "browser", "es6"]
   },
   "prettier": {
     "singleQuote": true,
