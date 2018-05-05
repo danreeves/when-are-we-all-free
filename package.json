@@ -39,7 +39,9 @@
   "scripts": {
     "start": "webpack-serve --config webpack.js",
     "dev": "webpack-serve --config webpack.js --development",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "lint": "xo",
+    "flow": "flow"
   },
   "repository": {
     "type": "git",
@@ -60,6 +62,6 @@
     "trailingComma": "es5"
   },
   "lint-staged": {
-    "*.{js,jsx,json,md}": ["xo", "pretty-quick --staged"]
+    "*.{js,jsx,json,md}": ["xo --fix", "pretty-quick --staged"]
   }
 }

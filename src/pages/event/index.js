@@ -19,10 +19,11 @@ const getQuery = id => gql`
   }
 `;
 
-const SlotList = ({ eventId }) => (
+const SlotList = ({ eventId }: { eventId: string }) => (
   <Query query={getQuery(eventId)}>
     {({ loading, error, data }) => {
       if (loading) return <div>Loading...</div>;
+
       if (error) return <div>Error :(</div>;
 
       return (
@@ -38,10 +39,14 @@ const SlotList = ({ eventId }) => (
   </Query>
 );
 
-export default function SlotsPage({ match }) {
+type ReactRouterMatch = {
+  params: Object,
+};
+export default function SlotsPage({ match }: { match: ReactRouterMatch }) {
   return (
     <React.Fragment>
       <h1>Slots</h1>
+
       <SlotList eventId={match.params.id} />
     </React.Fragment>
   );
