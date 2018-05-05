@@ -1,0 +1,2 @@
+endpoint: https://eu1.prisma.sh/when-are-we-all-free/when-are-we-all-free/dev
+datamodel: datamodel.graphql

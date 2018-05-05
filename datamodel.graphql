@@ -1,0 +1,19 @@
+type User {
+  id: ID! @unique
+  name: String!
+  email: String! @unique
+}
+
+type Event {
+  id: ID! @unique
+  name: String!
+  description: String!
+}
+
+type Slot {
+  id: ID! @unique
+  event: Event!
+  user: User!
+  start: DateTime!
+  end: DateTime!
+}
