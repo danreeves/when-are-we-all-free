@@ -41,6 +41,14 @@ const CREATE_SLOT_QUERY = gql`
   }
 `;
 
+const DELETE_SLOT_QUERY = gql`
+  mutation deleteSlot($id: ID!) {
+    deleteSlot(where: { id: $id }) {
+      id
+    }
+  }
+`;
+
 const SUBSCRIPTION_QUERY = gql`
   subscription {
     slot(where: { mutation_in: [CREATED, UPDATED, DELETED] }) {
@@ -56,6 +64,28 @@ const SUBSCRIPTION_QUERY = gql`
     }
   }
 `;
+
+const DeleteSlotButton = ({ id }: { id: string }) => {
+  return (
+    <Mutation mutation={DELETE_SLOT_QUERY}>
+      {deleteSlot => {
+        return (
+          <button
+            onClick={() => {
+              deleteSlot({
+                variables: {
+                  id,
+                },
+              });
+            }}
+          >
+            Delete!
+          </button>
+        );
+      }}
+    </Mutation>
+  );
+};
 
 type SlotListProps = {
   data: Array<Object>,
@@ -74,7 +104,7 @@ class SlotList extends React.Component<SlotListProps> {
       <ul>
         {data.slots.map(({ id, start, end, user }) => (
           <li key={id}>
-            {user.name}: {start} - {end}
+            {user.name}: {start} - {end} <DeleteSlotButton id={id} />
           </li>
         ))}
       </ul>
