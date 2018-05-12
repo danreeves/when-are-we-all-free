@@ -61,6 +61,9 @@ const SUBSCRIPTION_QUERY = gql`
           name
         }
       }
+      previousValues {
+        id
+      }
     }
   }
 `;
@@ -133,7 +136,14 @@ const Slots = ({ eventId }: { eventId: string }) => (
                       slots: [...prev.slots, subscriptionData.data.slot.node],
                     };
                   case 'DELETED':
-                  // do stuff
+                    return {
+                      ...prev,
+                      slots: prev.slots.filter(
+                        slot =>
+                          slot.id !==
+                          subscriptionData.data.slot.previousValues.id
+                      ),
+                    };
                   case 'UPDATED':
                   default:
                     // Already handled - magic
