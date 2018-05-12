@@ -1,2 +1,3 @@
-endpoint: https://eu1.prisma.sh/when-are-we-all-free/when-are-we-all-free/dev
+# endpoint: https://eu1.prisma.sh/when-are-we-all-free/when-are-we-all-free/dev
+endpoint: http://localhost:4466
 datamodel: datamodel.graphql

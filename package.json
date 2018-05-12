@@ -39,8 +39,9 @@
     "xo": "^0.21.0"
   },
   "scripts": {
-    "start": "webpack-serve --config webpack.js",
-    "dev": "webpack-serve --config webpack.js --development",
+    "start": "NODE_ENV='production' webpack-serve --config webpack.js",
+    "dev":
+      "NODE_ENV='development' webpack-serve --config webpack.js --development",
     "precommit": "lint-staged",
     "lint": "xo",
     "flow": "flow"

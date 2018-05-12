@@ -11,11 +11,17 @@ import UsersPage from './pages/users';
 import EventsPage from './pages/events';
 import EventPage from './pages/event';
 
+const PRODUCTION = process.env.NODE_ENV !== 'development';
+
+const GRAPHQL_ENDPOINT = PRODUCTION
+  ? 'eu1.prisma.sh/when-are-we-all-free/when-are-we-all-free/dev'
+  : 'localhost:4466';
+
 const httpLink = new HttpLink({
-  uri: 'https://eu1.prisma.sh/when-are-we-all-free/when-are-we-all-free/dev',
+  uri: `http${PRODUCTION ? 's' : ''}://${GRAPHQL_ENDPOINT}`,
 });
 const wsLink = new WebSocketLink({
-  uri: `wss://eu1.prisma.sh/when-are-we-all-free/when-are-we-all-free/dev`,
+  uri: `ws${PRODUCTION ? 's' : ''}://${GRAPHQL_ENDPOINT}`,
   options: {
     reconnect: true,
   },
