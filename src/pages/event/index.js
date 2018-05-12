@@ -110,7 +110,13 @@ const Slots = ({ eventId }: { eventId: string }) => (
   </Query>
 );
 
-const CreateSlotButton = ({ eventId, userId }) => {
+const CreateSlotButton = ({
+  eventId,
+  userId,
+}: {
+  eventId: string,
+  userId: string,
+}) => {
   return (
     <Mutation mutation={CreateSlotQuery}>
       {createSlot => {
