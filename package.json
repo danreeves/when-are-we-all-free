@@ -11,8 +11,11 @@
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
     "connect-history-api-fallback": "^1.5.0",
+    "esm": "^3.0.34",
     "graphql": "^0.13.2",
+    "graphql-yoga": "^1.13.1",
     "koa-connect": "^2.0.1",
+    "prisma-binding": "^2.0.0",
     "react": "^16.3.2",
     "react-apollo": "^2.1.4",
     "react-dom": "^16.3.2",
@@ -28,23 +31,27 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-react": "^7.7.0",
     "flow-bin": "^0.71.0",
+    "graphql-cli": "^2.16.0",
     "html-webpack-plugin": "^3.2.0",
     "husky": "^0.14.3",
     "lint-staged": "^7.0.5",
+    "nodemon": "^1.17.4",
     "prettier": "^1.12.1",
     "pretty-quick": "^1.4.1",
+    "prisma": "^1.8.0",
     "webpack": "^4.7.0",
     "webpack-cli": "^2.1.2",
     "webpack-serve": "^0.3.2",
     "xo": "^0.21.0"
   },
   "scripts": {
-    "start": "NODE_ENV='production' webpack-serve --config webpack.js",
-    "dev":
+    "dev:app":
       "NODE_ENV='development' webpack-serve --config webpack.js --development",
+    "dev:server": "nodemon -r esm server/index.js",
     "precommit": "lint-staged",
     "lint": "xo",
-    "flow": "flow"
+    "flow": "flow",
+    "update-schema": "prisma deploy && gql get-schema -p database"
   },
   "repository": {
     "type": "git",

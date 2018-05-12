@@ -37,9 +37,13 @@ module.exports = {
   },
 
   mode: DEV ? 'development' : 'production',
+  stats: 'minimal',
 };
 
 module.exports.serve = {
+  dev: {
+    stats: 'minimal',
+  },
   content: [__dirname],
   add: app => {
     const historyOptions = {

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+tmux has -t wawaf &> /dev/null
+
+if [ $? -eq 0 ]; then
+    tmux kill-session -t wawaf
+else
+    tmux new-session -s wawaf 'npm run dev:app' \; \
+        split-window 'npm run dev:server' \; \
+        split-window \; \
+        select-layout tiled \;
+fi

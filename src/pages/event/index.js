@@ -196,7 +196,7 @@ export default function SlotsPage({ match }: { match: Match }) {
       <Slots eventId={match.params.id} />
       <CreateSlotButton
         eventId={match.params.id}
-        userId="cjgtgk8gw9zq60b51010nr4at"
+        userId="cjh3z85s2003007317gbpizdw"
       />
     </React.Fragment>
   );

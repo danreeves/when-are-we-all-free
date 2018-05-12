@@ -15,7 +15,7 @@ const PRODUCTION = process.env.NODE_ENV !== 'development';
 
 const GRAPHQL_ENDPOINT = PRODUCTION
   ? 'eu1.prisma.sh/when-are-we-all-free/when-are-we-all-free/dev'
-  : 'localhost:4466';
+  : 'localhost:4000';
 
 const httpLink = new HttpLink({
   uri: `http${PRODUCTION ? 's' : ''}://${GRAPHQL_ENDPOINT}`,
