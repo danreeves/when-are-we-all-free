@@ -3,13 +3,9 @@ import { gql } from 'apollo-boost';
 import { Query, Mutation } from 'react-apollo';
 import type { Match } from 'react-router-dom';
 
-const getQuery = id => gql`
-  query {
-    slots (where: {
-      event: {
-        id: "${id}"
-      }
-    }) {
+const GET_SLOTS_QUERY = gql`
+  query slots($eventId: ID!) {
+    slots(where: { event: { id: $eventId } }) {
       id
       start
       end
@@ -20,7 +16,7 @@ const getQuery = id => gql`
   }
 `;
 
-const CreateSlotQuery = gql`
+const CREATE_SLOT_QUERY = gql`
   mutation createSlot(
     $eventId: ID!
     $userId: ID!
@@ -45,7 +41,7 @@ const CreateSlotQuery = gql`
   }
 `;
 
-const getSubscription = () => gql`
+const SUBSCRIPTION_QUERY = gql`
   subscription {
     slot(where: { mutation_in: [CREATED, UPDATED, DELETED] }) {
       mutation
@@ -87,7 +83,7 @@ class SlotList extends React.Component<SlotListProps> {
 }
 
 const Slots = ({ eventId }: { eventId: string }) => (
-  <Query query={getQuery(eventId)}>
+  <Query query={GET_SLOTS_QUERY} variables={{ eventId }}>
     {({ loading, error, data, subscribeToMore }) => {
       if (loading) return <div>Loading...</div>;
       if (error) return <div>Error :(</div>;
@@ -97,7 +93,7 @@ const Slots = ({ eventId }: { eventId: string }) => (
           data={data}
           subscribeToMoreSlots={() => {
             subscribeToMore({
-              document: getSubscription(eventId),
+              document: SUBSCRIPTION_QUERY,
               updateQuery: (prev, { subscriptionData }) => {
                 console.log(prev, subscriptionData);
                 return prev;
@@ -118,7 +114,7 @@ const CreateSlotButton = ({
   userId: string,
 }) => {
   return (
-    <Mutation mutation={CreateSlotQuery}>
+    <Mutation mutation={CREATE_SLOT_QUERY}>
       {createSlot => {
         return (
           <button
