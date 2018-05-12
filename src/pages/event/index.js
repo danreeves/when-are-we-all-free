@@ -126,7 +126,19 @@ const Slots = ({ eventId }: { eventId: string }) => (
               document: SUBSCRIPTION_QUERY,
               updateQuery: (prev, { subscriptionData }) => {
                 console.log(prev, subscriptionData);
-                return prev;
+                switch (subscriptionData.data.slot.mutation) {
+                  case 'CREATED':
+                    return {
+                      ...prev,
+                      slots: [...prev.slots, subscriptionData.data.slot.node],
+                    };
+                  case 'DELETED':
+                  // do stuff
+                  case 'UPDATED':
+                  default:
+                    // Already handled - magic
+                    return prev;
+                }
               },
             });
           }}

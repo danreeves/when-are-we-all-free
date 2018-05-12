@@ -16,6 +16,7 @@ module.exports = {
 
         options: {
           presets: ['env', 'react'],
+          plugins: ['transform-object-rest-spread'],
         },
       },
     ],
